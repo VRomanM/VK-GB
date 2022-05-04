@@ -21,16 +21,10 @@ class LoginViewController: UIViewController {
             showLoginError()
             return
         }
-        // Получаем текст логина
-        let login = loginInput.text!
-        // Получаем текст-пароль
-        let password = passwordInput.text!
-        // Проверяем, верны ли они
-        if login == "admin" && password == "1" {
-            print("успешная авторизация")
-        } else {
-            print("неуспешная авторизация")
-        }
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "vkTabBarController")
+//        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
     }
     
     func checkUserData() -> Bool {
