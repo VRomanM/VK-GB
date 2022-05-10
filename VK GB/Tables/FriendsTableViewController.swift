@@ -47,6 +47,13 @@ class FriendsTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "profileFriend")
+        
+        //(vc as? GroupsTableViewController)?.data.append([data[indexPath.row][0],data[indexPath.row][1]])
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     /*
     // Override to support con4ditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

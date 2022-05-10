@@ -185,10 +185,10 @@
             </objects>
             <point key="canvasLocation" x="1838" y="461"/>
         </scene>
-        <!--Collection View Controller-->
+        <!--Profile Collection View Controller-->
         <scene sceneID="yzt-Lk-Uhs">
             <objects>
-                <collectionViewController id="caQ-54-dWB" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="profileFriend" id="caQ-54-dWB" customClass="ProfileCollectionViewController" customModule="VK_GB" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="dbu-ZB-ckm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -200,7 +200,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="CaM-ih-GPO">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="CaM-ih-GPO">
                                 <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Tff-nY-3hb">
