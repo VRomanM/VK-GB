@@ -10,7 +10,10 @@ import UIKit
 class FriendsTableViewController: UITableViewController {
 
     @IBOutlet var friendsTableView: UITableView!
-    private var data = ["Заюнька", "Санёк"]
+    //private var data = ["Заюнька", "Санёк"]
+    var vkData = [VKData(id: "Заюнька", imageName: "pawprint.fill"),
+                  VKData(id: "Санёк", imageName: "tortoise"),
+                  VKData(id: "Хороший парень", imageName: "ant")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,18 +35,17 @@ class FriendsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        switch tableView {
-        case self.tableView:
-            return self.data.count
-        default:
-            return 0
-        }
+        self.vkData.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "friendsCell", for: indexPath) as! FriendsTableViewCell
-        cell.alias?.text = self.data[indexPath.row]
-        cell.fullName?.text = self.data[indexPath.row]
+        cell.alias?.text = self.vkData[indexPath.row].id
+        cell.fullName?.text = self.vkData[indexPath.row].fullName
+        cell.avatar.image = UIImage(systemName: self.vkData[indexPath.row].imageName)
+        //cell.avatar.image = UIImage(named: "logo 1")
+        cell.avatar.layer.cornerRadius = cell.avatar.frame.size.width / 2
+        cell.avatar.clipsToBounds = true
         return cell
     }
     

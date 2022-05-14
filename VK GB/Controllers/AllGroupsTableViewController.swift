@@ -1,5 +1,5 @@
 //
-//  GroupsTableViewController.swift
+//  AllGroupsTableViewController.swift
 //  VK GB
 //
 //  Created by Роман Вертячих on 03.05.2022.
@@ -7,18 +7,20 @@
 
 import UIKit
 
-class GroupsTableViewController: UITableViewController {
+class AllGroupsTableViewController: UITableViewController {
 
-    @IBOutlet var groupsTableView: UITableView!
-    var data = [[String](),[String]()]
-        
+    @IBOutlet var allGroupsTableView: UITableView!
+    //var data = [["Фитнес","bolt.heart"],["Компьютеры","pc"], ["Книги","person.2.crop.square.stack"],["Волейбол","circle.fill"]]
+    var vkData = [VKData(id: "Фитнес", imageName: "bolt.heart"),
+                VKData(id: "Компьютеры", imageName: "pc"),
+                VKData(id: "Книги", imageName: "person.2.crop.square.stack"),
+                VKData(id: "Волейбол", imageName: "circle.fill")]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.tableView.reloadData()
-    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -28,27 +30,28 @@ class GroupsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        
-        switch tableView {
-        case self.tableView:
-            if self.data[0].count == 0 {
-                return 0
-            }else {
-                return self.data.count
-            }
-        default:
-            return 0
-        }
+        return self.vkData.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier")!
-              
-        cell.textLabel?.text = data[indexPath.row][0]
-        cell.imageView?.image = UIImage(systemName: data[indexPath.row][1])
-        cell.accessoryType = .checkmark
+        let cell = tableView.dequeueReusableCell(withIdentifier: "allGroupsCell", for: indexPath)
+        
+        cell.textLabel?.text = vkData[indexPath.row].id
+        cell.imageView?.image = UIImage(systemName: vkData[indexPath.row].imageName)
+        if vkData[indexPath.row].check {
+            cell.accessoryType = .checkmark
+        }
         
         return cell
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let sb = UIStoryboard(name: "Main", bundle: nil)
+//        let vc = sb.instantiateViewController(withIdentifier: "groupsTableView")
+//
+//        (vc as? GroupsTableViewController)?.data.append([data[indexPath.row][0],data[indexPath.row][1]])
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
 
     /*

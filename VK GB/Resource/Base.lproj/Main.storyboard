@@ -173,7 +173,7 @@
                         <barButtonItem key="backBarButtonItem" title="Назад" id="IE5-50-5eY"/>
                         <barButtonItem key="rightBarButtonItem" title="Добавить" image="plus" catalog="system" id="mfA-qN-XYm">
                             <connections>
-                                <segue destination="V4d-EL-7kG" kind="show" id="y9q-aa-miO"/>
+                                <segue destination="V4d-EL-7kG" kind="show" identifier="showAllGroup" id="78l-Wa-BNZ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -193,20 +193,60 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OrJ-8x-rnH">
-                            <size key="itemSize" width="128" height="128"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OrJ-8x-rnH">
+                            <size key="itemSize" width="191" height="230"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="CaM-ih-GPO">
-                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="CaM-ih-GPO" customClass="ProfileCollectionViewCell" customModule="VK_GB" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="191" height="230"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Tff-nY-3hb">
-                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="191" height="230"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bIT-jY-NfJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="191" height="230"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iy1-e2-DAd">
+                                                    <rect key="frame" x="5" y="185" width="181" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="DBL-ND-rD1"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ant-pT-o39">
+                                                    <rect key="frame" x="0.0" y="0.0" width="191" height="185"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="Iy1-e2-DAd" secondAttribute="bottom" constant="5" id="38v-eX-SLQ"/>
+                                                <constraint firstItem="ant-pT-o39" firstAttribute="leading" secondItem="bIT-jY-NfJ" secondAttribute="leading" id="AaC-th-Nuc"/>
+                                                <constraint firstItem="Iy1-e2-DAd" firstAttribute="leading" secondItem="bIT-jY-NfJ" secondAttribute="leading" constant="5" id="Dwk-o5-IeV"/>
+                                                <constraint firstItem="ant-pT-o39" firstAttribute="top" secondItem="bIT-jY-NfJ" secondAttribute="top" id="e7B-a4-F5L"/>
+                                                <constraint firstAttribute="trailing" secondItem="ant-pT-o39" secondAttribute="trailing" id="hRy-La-jH5"/>
+                                                <constraint firstAttribute="trailing" secondItem="Iy1-e2-DAd" secondAttribute="trailing" constant="5" id="nLY-pI-iNK"/>
+                                                <constraint firstItem="Iy1-e2-DAd" firstAttribute="top" secondItem="ant-pT-o39" secondAttribute="bottom" id="ytm-9h-YS8"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="bIT-jY-NfJ" secondAttribute="bottom" id="E13-B1-PAn"/>
+                                        <constraint firstAttribute="trailing" secondItem="bIT-jY-NfJ" secondAttribute="trailing" id="FFH-We-k0M"/>
+                                        <constraint firstItem="bIT-jY-NfJ" firstAttribute="top" secondItem="Tff-nY-3hb" secondAttribute="top" id="Le7-1H-lIL"/>
+                                        <constraint firstItem="bIT-jY-NfJ" firstAttribute="leading" secondItem="Tff-nY-3hb" secondAttribute="leading" id="tYR-FW-FJu"/>
+                                    </constraints>
                                 </collectionViewCellContentView>
+                                <size key="customSize" width="191" height="230"/>
+                                <connections>
+                                    <outlet property="descriptionPhoto" destination="Iy1-e2-DAd" id="fOQ-J9-3Yb"/>
+                                    <outlet property="image" destination="ant-pT-o39" id="AXo-Ge-cNm"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -218,7 +258,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hCF-BE-IOS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2587" y="-209"/>
+            <point key="canvasLocation" x="2586.9565217391305" y="-209.59821428571428"/>
         </scene>
         <!--Друзья-->
         <scene sceneID="Uxf-N2-Kxe">
@@ -250,7 +290,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="oZd-w7-rgy">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="oZd-w7-rgy">
                                 <rect key="frame" x="0.0" y="49.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oZd-w7-rgy" id="ffe-DM-GAK">
@@ -300,6 +340,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="8dz-XG-MYl" kind="unwind" identifier="addGroup" unwindAction="addGroupWithSegue:" id="eW8-rI-wxI"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -313,6 +356,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JIp-Dc-G4f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="8dz-XG-MYl" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2587" y="461"/>
         </scene>
