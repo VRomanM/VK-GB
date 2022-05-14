@@ -13,14 +13,35 @@ class VKData: Equatable {
         return areEqual
     }
     
-    var id: String
-    var imageName: String
+    let id: String
+    let imageName: String
     var check: Bool = false
-    var fullName: String = ""
+    let fullName: String = ""
+    var photo = [Photo]()
     
     init (id: String, imageName: String){
         self.id = id
         self.imageName = imageName
+        if id == "Заюнька" {
+            self.photo = [
+                            Photo(id: "person.wave.2", description: "На море", like: 2),
+                            Photo(id: "person.wave.2.fill", description: "На природе", like: 4),
+                            Photo(id: "person.2.wave.2", description: "Дома", like: 0)
+                        ]
+        }
+    }
+}
+
+class Photo {
+    let id: String
+    let description: String
+    var like: UInt8
+    var myLike: UInt8 = 0
+    
+    init (id: String, description: String, like: UInt8) {
+        self.id = id
+        self.description = description
+        self.like = like
     }
 }
 

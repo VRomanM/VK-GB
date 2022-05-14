@@ -43,7 +43,6 @@ class FriendsTableViewController: UITableViewController {
         cell.alias?.text = self.vkData[indexPath.row].id
         cell.fullName?.text = self.vkData[indexPath.row].fullName
         cell.avatar.image = UIImage(systemName: self.vkData[indexPath.row].imageName)
-        //cell.avatar.image = UIImage(named: "logo 1")
         cell.avatar.layer.cornerRadius = cell.avatar.frame.size.width / 2
         cell.avatar.clipsToBounds = true
         return cell
@@ -51,9 +50,10 @@ class FriendsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "profileFriend")
+        let vc = sb.instantiateViewController(withIdentifier: "profileFriend") as! ProfileCollectionViewController
+        vc.title = vkData[indexPath.row].id
+        vc.photo = vkData[indexPath.row].photo
         
-        //(vc as? GroupsTableViewController)?.data.append([data[indexPath.row][0],data[indexPath.row][1]])
         self.navigationController?.pushViewController(vc, animated: true)
     }
     /*

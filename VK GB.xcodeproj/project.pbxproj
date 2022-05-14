@@ -86,8 +86,8 @@
 			isa = PBXGroup;
 			children = (
 				FC19030A281B060700018187 /* Assets.xcassets */,
-				FC190307281B060600018187 /* Main.storyboard */,
 				FC19030C281B060700018187 /* LaunchScreen.storyboard */,
+				FC190307281B060600018187 /* Main.storyboard */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -95,8 +95,8 @@
 		FC48927B282F40E400F2E19E /* Help */ = {
 			isa = PBXGroup;
 			children = (
-				FC190303281B060600018187 /* SceneDelegate.swift */,
 				FC190301281B060600018187 /* AppDelegate.swift */,
+				FC190303281B060600018187 /* SceneDelegate.swift */,
 			);
 			path = Help;
 			sourceTree = "<group>";
@@ -105,8 +105,8 @@
 			isa = PBXGroup;
 			children = (
 				FCC2488228217F6300769EC3 /* FriendsTableViewCell.swift */,
-				FCD1E739282ADFEC007C837E /* ProfileCollectionViewCell.swift */,
 				FCC2488328217F6300769EC3 /* FriendsTableViewCell.xib */,
+				FCD1E739282ADFEC007C837E /* ProfileCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -114,11 +114,11 @@
 		FCC248892821A5B500769EC3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FC190305281B060600018187 /* LoginViewController.swift */,
-				FC1C45D02826B4420035B0EE /* ProfileCollectionViewController.swift */,
-				FCC24887282186CE00769EC3 /* GroupsTableViewController.swift */,
 				FCC2488A2821A5F300769EC3 /* AllGroupsTableViewController.swift */,
 				FCC2488028217BB100769EC3 /* FriendsTableViewController.swift */,
+				FCC24887282186CE00769EC3 /* GroupsTableViewController.swift */,
+				FC190305281B060600018187 /* LoginViewController.swift */,
+				FC1C45D02826B4420035B0EE /* ProfileCollectionViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
