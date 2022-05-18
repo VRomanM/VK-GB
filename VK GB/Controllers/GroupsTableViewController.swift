@@ -10,7 +10,7 @@ import UIKit
 class GroupsTableViewController: UITableViewController {
 
     @IBOutlet var groupsTableView: UITableView!
-    var vkData = [VKData]()
+    var vkGroup = [GroupVK]()
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,9 +24,9 @@ class GroupsTableViewController: UITableViewController {
         if segue.identifier == "addGroup" {
             guard let allGroupsController = segue.source as? AllGroupsTableViewController else { return }
             if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
-                let group = allGroupsController.vkData[indexPath.row]
-                if !vkData.contains(group) {
-                    vkData.append(group)
+                let group = allGroupsController.vkGroup[indexPath.row]
+                if !vkGroup.contains(group) {
+                    vkGroup.append(group)
                     tableView.reloadData()
                 }
             }
@@ -36,8 +36,8 @@ class GroupsTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         guard segue.identifier == "showAllGroup" else {return}
-        guard let dData = (segue.destination as? AllGroupsTableViewController)?.vkData else {return}
-        for element in vkData {
+        guard let dData = (segue.destination as? AllGroupsTableViewController)?.vkGroup else {return}
+        for element in vkGroup {
             guard let idx = find(value: element, in: dData) else { return }
             dData[idx].check = true
         }
@@ -52,7 +52,7 @@ class GroupsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.vkData.count
+        return self.vkGroup.count
 //        switch tableView {
 //        case self.tableView:
 //            if self.data[0].count == 0 {
@@ -68,8 +68,8 @@ class GroupsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier")!
               
-        cell.textLabel?.text = vkData[indexPath.row].id
-        cell.imageView?.image = UIImage(systemName: vkData[indexPath.row].imageName)
+        cell.textLabel?.text = vkGroup[indexPath.row].id
+        cell.imageView?.image = UIImage(systemName: vkGroup[indexPath.row].imageName)
         
         return cell
     }
@@ -86,7 +86,7 @@ class GroupsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            vkData.remove(at: indexPath.row)
+            vkGroup.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         //} else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view

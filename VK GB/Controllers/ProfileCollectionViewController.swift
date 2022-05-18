@@ -11,12 +11,6 @@ private let reuseIdentifier = "Cell"
 
 class ProfileCollectionViewController: UICollectionViewController {
     var photo = [Photo]()
-
-    @IBAction func bLike(_ sender: UIButton) {
-        let a = 1
-        //collectionView.focusItemContainer.
-        
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

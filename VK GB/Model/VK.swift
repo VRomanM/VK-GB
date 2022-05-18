@@ -7,8 +7,8 @@
 
 import UIKit
 
-class VKData: Equatable {
-    static func == (lhs: VKData, rhs: VKData) -> Bool {
+class GroupVK: Equatable {
+    static func == (lhs: GroupVK, rhs: GroupVK) -> Bool {
         let areEqual = lhs.id == rhs.id && lhs.imageName == rhs.imageName
         return areEqual
     }
@@ -16,12 +16,40 @@ class VKData: Equatable {
     let id: String
     let imageName: String
     var check: Bool = false
-    let fullName: String = ""
-    var photo = [Photo]()
     
     init (id: String, imageName: String){
         self.id = id
         self.imageName = imageName
+    }
+}
+
+class UserVK: Equatable {
+    static func == (lhs: UserVK, rhs: UserVK) -> Bool {
+        let areEqual = lhs.id == rhs.id
+        return areEqual
+    }
+    
+    let id: String
+    var image: UIImage = UIImage(systemName: "photo")!
+    var check: Bool = false
+    let fullName: String = ""
+    var photo = [Photo]()
+    
+    init (id: String, image: UIImage){
+        self.id = id
+        self.image = image
+        if id == "Заюнька" {
+            self.photo = [
+                            Photo(id: "person.wave.2", description: "На море", like: 2),
+                            Photo(id: "person.wave.2.fill", description: "На природе", like: 4),
+                            Photo(id: "person.2.wave.2", description: "Дома", like: 0)
+                        ]
+        }
+    }
+    
+    init (id: String, imageSysName: String){
+        self.id = id
+        self.image = UIImage(systemName: imageSysName)!
         if id == "Заюнька" {
             self.photo = [
                             Photo(id: "person.wave.2", description: "На море", like: 2),

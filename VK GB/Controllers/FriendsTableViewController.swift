@@ -11,9 +11,20 @@ class FriendsTableViewController: UITableViewController {
 
     @IBOutlet var friendsTableView: UITableView!
     //private var data = ["Заюнька", "Санёк"]
-    var vkData = [VKData(id: "Заюнька", imageName: "pawprint.fill"),
-                  VKData(id: "Санёк", imageName: "tortoise"),
-                  VKData(id: "Хороший парень", imageName: "ant")]
+    var vkUser = [
+        [UserVK(id: "Александр победоностный", imageSysName: "ant"),
+         UserVK(id: "Антон Мокрый", imageSysName: "ant"),
+         UserVK(id: "Алексей Кривой", imageSysName: "ant"),
+         UserVK(id: "Алексей Невидимый", imageSysName: "ant")],
+            
+        [UserVK(id: "Заюнька", imageSysName:"pawprint.fill"),
+         UserVK(id: "Зяблик", imageSysName: "pawprint"),
+         UserVK(id: "Заррубин", imageSysName: "pawprint")],
+            
+        [UserVK(id: "Хлюпик", imageSysName: "tortoise"),
+         UserVK(id: "Хомосапиенс", imageSysName: "tortoise"),
+         UserVK(id: "Хороший парень", imageSysName: "tortoise")]
+                ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,19 +41,19 @@ class FriendsTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return self.vkUser.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        self.vkData.count
+        self.vkUser[section].count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "friendsCell", for: indexPath) as! FriendsTableViewCell
-        cell.alias?.text = self.vkData[indexPath.row].id
-        cell.fullName?.text = self.vkData[indexPath.row].fullName
-        cell.avatar.image = UIImage(systemName: self.vkData[indexPath.row].imageName)
+        cell.alias?.text = self.vkUser[indexPath.section][indexPath.row].id
+        cell.fullName?.text = self.vkUser[indexPath.section][indexPath.row].fullName
+        cell.avatar.image = self.vkUser[indexPath.section][indexPath.row].image
         cell.avatar.layer.cornerRadius = cell.avatar.frame.size.width / 2
         cell.avatar.clipsToBounds = true
         return cell
@@ -51,10 +62,14 @@ class FriendsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "profileFriend") as! ProfileCollectionViewController
-        vc.title = vkData[indexPath.row].id
-        vc.photo = vkData[indexPath.row].photo
+        vc.title = vkUser[indexPath.section][indexPath.row].id
+        vc.photo = vkUser[indexPath.section][indexPath.row].photo
         
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return self.vkUser[section][0].id
     }
     /*
     // Override to support con4ditional editing of the table view.

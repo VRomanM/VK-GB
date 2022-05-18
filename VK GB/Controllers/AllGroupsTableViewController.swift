@@ -11,10 +11,10 @@ class AllGroupsTableViewController: UITableViewController {
 
     @IBOutlet var allGroupsTableView: UITableView!
     //var data = [["Фитнес","bolt.heart"],["Компьютеры","pc"], ["Книги","person.2.crop.square.stack"],["Волейбол","circle.fill"]]
-    var vkData = [VKData(id: "Фитнес", imageName: "bolt.heart"),
-                VKData(id: "Компьютеры", imageName: "pc"),
-                VKData(id: "Книги", imageName: "person.2.crop.square.stack"),
-                VKData(id: "Волейбол", imageName: "circle.fill")]
+    var vkGroup = [GroupVK(id: "Фитнес", imageName: "bolt.heart"),
+                  GroupVK(id: "Компьютеры", imageName: "pc"),
+                  GroupVK(id: "Книги", imageName: "person.2.crop.square.stack"),
+                  GroupVK(id: "Волейбол", imageName: "circle.fill")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,15 +30,15 @@ class AllGroupsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.vkData.count
+        return self.vkGroup.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "allGroupsCell", for: indexPath)
         
-        cell.textLabel?.text = vkData[indexPath.row].id
-        cell.imageView?.image = UIImage(systemName: vkData[indexPath.row].imageName)
-        if vkData[indexPath.row].check {
+        cell.textLabel?.text = vkGroup[indexPath.row].id
+        cell.imageView?.image = UIImage(systemName: vkGroup[indexPath.row].imageName)
+        if vkGroup[indexPath.row].check {
             cell.accessoryType = .checkmark
         }
         
