@@ -13,12 +13,6 @@ class FriendsTableViewCell: UITableViewCell {
     @IBOutlet weak var alias: UILabel!
     @IBOutlet weak var fullName: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-        avatar.layer.cornerRadius = avatar.bounds.width / 2
-    }
-
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
