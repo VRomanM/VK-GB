@@ -14,6 +14,7 @@ class ProfileCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var likeControl: LikeControl!
     @IBOutlet var containerView: UIView!
+    @IBOutlet weak var likeCount: UILabel!
     
     override func awakeFromNib() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handlerTap(_:)))
@@ -26,8 +27,11 @@ class ProfileCollectionViewCell: UICollectionViewCell {
         likeControl.isLiked.toggle()
         if likeControl.isLiked {
             likeControl.likeImage.image = UIImage(systemName: "suit.heart.fill")
+                        
+            likeCount.text = String(Int(likeCount.text ?? "0")! + 1)
         } else {
             likeControl.likeImage.image = nil
+            likeCount.text = String(Int(likeCount.text ?? "0")! - 1)
         }
     }
     

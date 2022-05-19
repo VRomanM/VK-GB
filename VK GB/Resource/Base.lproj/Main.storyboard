@@ -242,16 +242,25 @@
                                                 <outlet property="likeImage" destination="tTX-J9-RbQ" id="3P0-Oc-aRO"/>
                                             </connections>
                                         </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0uU-8g-ozs">
+                                            <rect key="frame" x="113.5" y="181" width="64.5" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="Iy1-e2-DAd" firstAttribute="top" secondItem="ant-pT-o39" secondAttribute="bottom" constant="8" symbolic="YES" id="3xG-yZ-MRy"/>
                                         <constraint firstAttribute="trailing" secondItem="Ld2-dT-NEO" secondAttribute="trailing" constant="71.5" id="Aep-ig-ovu"/>
                                         <constraint firstAttribute="bottom" secondItem="Ld2-dT-NEO" secondAttribute="bottom" constant="28" id="B7o-iB-ya8"/>
+                                        <constraint firstAttribute="trailing" secondItem="0uU-8g-ozs" secondAttribute="trailing" constant="5" id="FdE-XJ-fqs"/>
                                         <constraint firstItem="ant-pT-o39" firstAttribute="centerX" secondItem="Tff-nY-3hb" secondAttribute="centerX" id="GAw-IM-mdP"/>
                                         <constraint firstAttribute="bottom" secondItem="Iy1-e2-DAd" secondAttribute="bottom" id="MFJ-AM-5wI"/>
                                         <constraint firstItem="Ld2-dT-NEO" firstAttribute="centerX" secondItem="Tff-nY-3hb" secondAttribute="centerX" id="RNq-Vc-3i7"/>
                                         <constraint firstItem="ant-pT-o39" firstAttribute="width" secondItem="Tff-nY-3hb" secondAttribute="width" id="Tcj-Wj-UwH"/>
+                                        <constraint firstAttribute="bottom" secondItem="0uU-8g-ozs" secondAttribute="bottom" constant="28" id="Ysc-eX-stj"/>
                                         <constraint firstItem="Ld2-dT-NEO" firstAttribute="leading" secondItem="Tff-nY-3hb" secondAttribute="leading" constant="71.5" id="ZFq-ZT-6ib"/>
+                                        <constraint firstItem="0uU-8g-ozs" firstAttribute="leading" secondItem="Ld2-dT-NEO" secondAttribute="trailing" constant="2" id="iQ9-b8-ZWZ"/>
                                         <constraint firstItem="Iy1-e2-DAd" firstAttribute="leading" secondItem="Tff-nY-3hb" secondAttribute="leading" constant="5" id="llc-7J-vfW"/>
                                         <constraint firstItem="ant-pT-o39" firstAttribute="top" secondItem="Tff-nY-3hb" secondAttribute="top" id="sOW-VT-g3W"/>
                                         <constraint firstAttribute="trailing" secondItem="Iy1-e2-DAd" secondAttribute="trailing" constant="5" id="scE-34-f3w"/>
@@ -263,6 +272,7 @@
                                     <outlet property="descriptionPhoto" destination="Iy1-e2-DAd" id="fOQ-J9-3Yb"/>
                                     <outlet property="image" destination="ant-pT-o39" id="AXo-Ge-cNm"/>
                                     <outlet property="likeControl" destination="Ld2-dT-NEO" id="E4j-DJ-9e6"/>
+                                    <outlet property="likeCount" destination="0uU-8g-ozs" id="onl-uy-rBq"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
