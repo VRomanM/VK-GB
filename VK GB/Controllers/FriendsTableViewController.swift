@@ -11,6 +11,7 @@ class FriendsTableViewController: UITableViewController {
 
     @IBOutlet var friendsTableView: UITableView!
     //private var data = ["Заюнька", "Санёк"]
+    
     var vkUser = [
         [UserVK(id: "Александр победоностный", imageSysName: "ant"),
          UserVK(id: "Антон Мокрый", imageSysName: "ant"),
@@ -26,6 +27,21 @@ class FriendsTableViewController: UITableViewController {
          UserVK(id: "Хороший парень", imageSysName: "tortoise")]
                 ]
     
+//    let vkUser = [UserVK(id: "Александр победоностный", imageSysName: "ant"),
+//                         UserVK(id: "Антон Мокрый", imageSysName: "ant"),
+//                         UserVK(id: "Алексей Кривой", imageSysName: "ant"),
+//                         UserVK(id: "Алексей Невидимый", imageSysName: "ant"),
+//                        UserVK(id: "Заюнька", imageSysName:"pawprint.fill"),
+//                         UserVK(id: "Зяблик", imageSysName: "pawprint"),
+//                         UserVK(id: "Заррубин", imageSysName: "pawprint"),
+//
+//                        UserVK(id: "Хлюпик", imageSysName: "tortoise"),
+//                         UserVK(id: "Хомосапиенс", imageSysName: "tortoise"),
+//                         UserVK(id: "Хороший парень", imageSysName: "tortoise")]
+    
+//    let sortedUsers =
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         friendsTableView.register(UINib(nibName: "FriendsTableViewCell", bundle: nil), forCellReuseIdentifier: "friendsCell")
@@ -37,6 +53,10 @@ class FriendsTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
+//    private func sortedUsers(users array: [UserVK]) -> [Character: [UserVK]] {
+//
+//    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
