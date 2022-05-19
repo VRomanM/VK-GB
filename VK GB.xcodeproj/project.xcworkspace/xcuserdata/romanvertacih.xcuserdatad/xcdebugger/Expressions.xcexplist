@@ -3,10 +3,18 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "GroupsTableViewController.tableView(_:numberOfRowsInSection:):GroupsTableViewController.swift">
+         contextName = "GroupsTableViewController.addGroup(segue:):GroupsTableViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.data[0]">
+               value = "data">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProfileCollectionViewController.bLike(_:):ProfileCollectionViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "collectionView.focusItemContainer">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -15,6 +23,22 @@
          <PersistentStrings>
             <PersistentString
                value = "super.tableView">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GroupsTableViewController.tableView(_:numberOfRowsInSection:):GroupsTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.data[0]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AllGroupsTableViewController.viewDidLoad():AllGroupsTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "super.storyboard.self?.instantiateViewController(withIdentifier: &quot;groupsTableView&quot;)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

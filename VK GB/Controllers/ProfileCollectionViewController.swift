@@ -10,7 +10,14 @@ import UIKit
 private let reuseIdentifier = "Cell"
 
 class ProfileCollectionViewController: UICollectionViewController {
+    var photo = [Photo]()
 
+    @IBAction func bLike(_ sender: UIButton) {
+        let a = 1
+        //collectionView.focusItemContainer.
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,7 +25,7 @@ class ProfileCollectionViewController: UICollectionViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        //self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
     }
@@ -43,12 +50,14 @@ class ProfileCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 1
+        return photo.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ProfileCollectionViewCell
         //cell.contentView = UINib(nibName: <#T##String#>, bundle: <#T##Bundle?#>)
+        cell.descriptionPhoto.text = photo[indexPath.row].description
+        cell.image.image = UIImage(systemName: photo[indexPath.row].id)
         return cell
     }
 

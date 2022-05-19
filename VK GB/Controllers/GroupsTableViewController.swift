@@ -1,5 +1,5 @@
 //
-//  AllGroupsTableViewController.swift
+//  GroupsTableViewController.swift
 //  VK GB
 //
 //  Created by Роман Вертячих on 03.05.2022.
@@ -7,15 +7,42 @@
 
 import UIKit
 
-class AllGroupsTableViewController: UITableViewController {
+class GroupsTableViewController: UITableViewController {
 
-    @IBOutlet var allGroupsTableView: UITableView!
-    private var data = [["Фитнес","bolt.heart"],["Компьютеры","pc"], ["Книги","person.2.crop.square.stack"],["Волейбол","circle.fill"]]
-    
+    @IBOutlet var groupsTableView: UITableView!
+    var vkData = [VKData]()
+        
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tableView.reloadData()
+    }
+    
+    @IBAction func addGroup(segue: UIStoryboardSegue) {
+        if segue.identifier == "addGroup" {
+            guard let allGroupsController = segue.source as? AllGroupsTableViewController else { return }
+            if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
+                let group = allGroupsController.vkData[indexPath.row]
+                if !vkData.contains(group) {
+                    vkData.append(group)
+                    tableView.reloadData()
+                }
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        guard segue.identifier == "showAllGroup" else {return}
+        guard let dData = (segue.destination as? AllGroupsTableViewController)?.vkData else {return}
+        for element in vkData {
+            guard let idx = find(value: element, in: dData) else { return }
+            dData[idx].check = true
+        }
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -25,37 +52,26 @@ class AllGroupsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        switch tableView {
-        case self.tableView:
-            if self.data[0].count == 0 {
-                return 0
-            }else {
-                return self.data.count
-            }
-        default:
-            return 0
-        }
+        return self.vkData.count
+//        switch tableView {
+//        case self.tableView:
+//            if self.data[0].count == 0 {
+//                return 0
+//            }else {
+//                return self.data.count
+//            }
+//        default:
+//            return 0
+//        }
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "allGroupsCell", for: indexPath)
-        
-        cell.textLabel?.text = data[indexPath.row][0]
-        cell.imageView?.image = UIImage(systemName: data[indexPath.row][1])
-        //cell.accessoryType = .checkmark
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier")!
+              
+        cell.textLabel?.text = vkData[indexPath.row].id
+        cell.imageView?.image = UIImage(systemName: vkData[indexPath.row].imageName)
         
         return cell
-        
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "groupsTableView")
-        
-        (vc as? GroupsTableViewController)?.data.append([data[indexPath.row][0],data[indexPath.row][1]])
-        self.navigationController?.pushViewController(vc, animated: true)
-        super.tableView.reloadData()
     }
 
     /*
@@ -66,17 +82,16 @@ class AllGroupsTableViewController: UITableViewController {
     }
     */
 
-    /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
+            vkData.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
+        //} else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
 
     /*
     // Override to support rearranging the table view.

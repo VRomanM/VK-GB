@@ -1,5 +1,5 @@
 //
-//  FriendsTableViewController.swift
+//  AllGroupsTableViewController.swift
 //  VK GB
 //
 //  Created by Роман Вертячих on 03.05.2022.
@@ -7,22 +7,20 @@
 
 import UIKit
 
-class FriendsTableViewController: UITableViewController {
+class AllGroupsTableViewController: UITableViewController {
 
-    @IBOutlet var friendsTableView: UITableView!
-    private var data = ["Заюнька", "Санёк"]
+    @IBOutlet var allGroupsTableView: UITableView!
+    //var data = [["Фитнес","bolt.heart"],["Компьютеры","pc"], ["Книги","person.2.crop.square.stack"],["Волейбол","circle.fill"]]
+    var vkData = [VKData(id: "Фитнес", imageName: "bolt.heart"),
+                VKData(id: "Компьютеры", imageName: "pc"),
+                VKData(id: "Книги", imageName: "person.2.crop.square.stack"),
+                VKData(id: "Волейбол", imageName: "circle.fill")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        friendsTableView.register(UINib(nibName: "FriendsTableViewCell", bundle: nil), forCellReuseIdentifier: "friendsCell")
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -32,30 +30,32 @@ class FriendsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        switch tableView {
-        case self.tableView:
-            return self.data.count
-        default:
-            return 0
-        }
+        return self.vkData.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "friendsCell", for: indexPath) as! FriendsTableViewCell
-        cell.alias?.text = self.data[indexPath.row]
-        cell.fullName?.text = self.data[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "allGroupsCell", for: indexPath)
+        
+        cell.textLabel?.text = vkData[indexPath.row].id
+        cell.imageView?.image = UIImage(systemName: vkData[indexPath.row].imageName)
+        if vkData[indexPath.row].check {
+            cell.accessoryType = .checkmark
+        }
+        
         return cell
+        
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "profileFriend")
-        
-        //(vc as? GroupsTableViewController)?.data.append([data[indexPath.row][0],data[indexPath.row][1]])
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let sb = UIStoryboard(name: "Main", bundle: nil)
+//        let vc = sb.instantiateViewController(withIdentifier: "groupsTableView")
+//
+//        (vc as? GroupsTableViewController)?.data.append([data[indexPath.row][0],data[indexPath.row][1]])
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
+
     /*
-    // Override to support con4ditional editing of the table view.
+    // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
