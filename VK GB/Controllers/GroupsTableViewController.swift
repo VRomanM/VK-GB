@@ -24,7 +24,7 @@ class GroupsTableViewController: UITableViewController {
         if segue.identifier == "addGroup" {
             guard let allGroupsController = segue.source as? AllGroupsTableViewController else { return }
             if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
-                let group = allGroupsController.vkGroup[indexPath.row]
+                let group = allGroupsController.filteredData[indexPath.row]
                 if !vkGroup.contains(group) {
                     vkGroup.append(group)
                     tableView.reloadData()
@@ -36,7 +36,7 @@ class GroupsTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         guard segue.identifier == "showAllGroup" else {return}
-        guard let dData = (segue.destination as? AllGroupsTableViewController)?.vkGroup else {return}
+        guard let dData = (segue.destination as? AllGroupsTableViewController)?.filteredData else {return}
         for element in vkGroup {
             guard let idx = find(value: element, in: dData) else { return }
             dData[idx].check = true

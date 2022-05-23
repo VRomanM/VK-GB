@@ -7,17 +7,22 @@
 
 import UIKit
 
-class AllGroupsTableViewController: UITableViewController {
+class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate {
 
     @IBOutlet var allGroupsTableView: UITableView!
+    @IBOutlet weak var searchGroup: UISearchBar!
+    
     //var data = [["Фитнес","bolt.heart"],["Компьютеры","pc"], ["Книги","person.2.crop.square.stack"],["Волейбол","circle.fill"]]
-    var vkGroup = [GroupVK(id: "Фитнес", imageName: "bolt.heart"),
+    var vkGroups = [GroupVK(id: "Фитнес", imageName: "bolt.heart"),
                   GroupVK(id: "Компьютеры", imageName: "pc"),
                   GroupVK(id: "Книги", imageName: "person.2.crop.square.stack"),
                   GroupVK(id: "Волейбол", imageName: "circle.fill")]
     
+    var filteredData: [GroupVK]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        filteredData = vkGroups
     }
 
     
@@ -30,20 +35,29 @@ class AllGroupsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.vkGroup.count
+        return filteredData.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "allGroupsCell", for: indexPath)
         
-        cell.textLabel?.text = vkGroup[indexPath.row].id
-        cell.imageView?.image = UIImage(systemName: vkGroup[indexPath.row].imageName)
-        if vkGroup[indexPath.row].check {
+        cell.textLabel?.text = filteredData[indexPath.row].id
+        cell.imageView?.image = UIImage(systemName: filteredData[indexPath.row].imageName)
+        if filteredData[indexPath.row].check {
             cell.accessoryType = .checkmark
         }
         
         return cell
         
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredData = searchText.isEmpty ? vkGroups : vkGroups.filter({(vkGroup: GroupVK) -> Bool in
+            // If dataItem matches the searchText, return true to include it
+            return vkGroup.id.range(of: searchText, options: .caseInsensitive) != nil
+        })
+
+            tableView.reloadData()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

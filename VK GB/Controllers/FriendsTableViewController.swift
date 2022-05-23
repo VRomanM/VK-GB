@@ -12,40 +12,42 @@ class FriendsTableViewController: UITableViewController {
     @IBOutlet var friendsTableView: UITableView!
     //private var data = ["Заюнька", "Санёк"]
     
-    var vkUser = [
-        [UserVK(id: "Александр победоностный", imageSysName: "ant"),
-         UserVK(id: "Антон Мокрый", imageSysName: "ant"),
-         UserVK(id: "Алексей Кривой", imageSysName: "ant"),
-         UserVK(id: "Алексей Невидимый", imageSysName: "ant")],
-            
-        [UserVK(id: "Заюнька", imageSysName:"pawprint.fill"),
-         UserVK(id: "Зяблик", imageSysName: "pawprint"),
-         UserVK(id: "Заррубин", imageSysName: "pawprint")],
-            
-        [UserVK(id: "Хлюпик", imageSysName: "tortoise"),
-         UserVK(id: "Хомосапиенс", imageSysName: "tortoise"),
-         UserVK(id: "Хороший парень", imageSysName: "tortoise")]
-                ]
-    
-//    let vkUser = [UserVK(id: "Александр победоностный", imageSysName: "ant"),
-//                         UserVK(id: "Антон Мокрый", imageSysName: "ant"),
-//                         UserVK(id: "Алексей Кривой", imageSysName: "ant"),
-//                         UserVK(id: "Алексей Невидимый", imageSysName: "ant"),
-//                        UserVK(id: "Заюнька", imageSysName:"pawprint.fill"),
-//                         UserVK(id: "Зяблик", imageSysName: "pawprint"),
-//                         UserVK(id: "Заррубин", imageSysName: "pawprint"),
+//    var vkUser = [
+//        [UserVK(id: "Александр победоностный", imageSysName: "ant"),
+//         UserVK(id: "Антон Мокрый", imageSysName: "ant"),
+//         UserVK(id: "Алексей Кривой", imageSysName: "ant"),
+//         UserVK(id: "Алексей Невидимый", imageSysName: "ant")],
 //
-//                        UserVK(id: "Хлюпик", imageSysName: "tortoise"),
-//                         UserVK(id: "Хомосапиенс", imageSysName: "tortoise"),
-//                         UserVK(id: "Хороший парень", imageSysName: "tortoise")]
+//        [UserVK(id: "Заюнька", imageSysName:"pawprint.fill"),
+//         UserVK(id: "Зяблик", imageSysName: "pawprint"),
+//         UserVK(id: "Заррубин", imageSysName: "pawprint")],
+//
+//        [UserVK(id: "Хлюпик", imageSysName: "tortoise"),
+//         UserVK(id: "Хомосапиенс", imageSysName: "tortoise"),
+//         UserVK(id: "Хороший парень", imageSysName: "tortoise")]
+//                ]
     
-//    let sortedUsers =
+    var vkUser = [
+                    UserVK(id: "Хороший парень", imageSysName: "tortoise"),
+                    UserVK(id: "Александр победоностный", imageSysName: "ant"),
+                    UserVK(id: "Антон Мокрый", imageSysName: "ant"),
+                    UserVK(id: "Алексей Кривой", imageSysName: "ant"),
+                    UserVK(id: "Алексей Невидимый", imageSysName: "ant"),
+                    UserVK(id: "Заюнька", imageSysName:"pawprint.fill"),
+                    UserVK(id: "Зяблик", imageSysName: "pawprint"),
+                    UserVK(id: "Заррубин", imageSysName: "pawprint"),
+                    UserVK(id: "Хлюпик", imageSysName: "tortoise"),
+                    UserVK(id: "Хомосапиенс", imageSysName: "tortoise")
+                  ]
     
-    
-    override func viewDidLoad() {
+
+   var sortedUsers = [Character: [UserVK]]()
+   
+   override func viewDidLoad() {
         super.viewDidLoad()
         friendsTableView.register(UINib(nibName: "FriendsTableViewCell", bundle: nil), forCellReuseIdentifier: "friendsCell")
         
+       self.sortedUsers = sortUsers(vkUsers: vkUser)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -53,27 +55,47 @@ class FriendsTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
-//    private func sortedUsers(users array: [UserVK]) -> [Character: [UserVK]] {
-//
-//    }
-    
+    private func sortUsers(vkUsers: [UserVK]) -> [Character: [UserVK]] {
+        var sortedUser = [Character: [UserVK]]()
+        
+        vkUsers.forEach{vkUser in
+            guard let firstChar = vkUser.id.first else {return}
+            if var arrayUsers = sortedUser[firstChar] {
+                arrayUsers.append(vkUser)
+                sortedUser[firstChar] = arrayUsers
+            } else {
+                sortedUser[firstChar] = [vkUser]
+            }
+        }
+        return sortedUser
+    }
+            
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return self.vkUser.count
+        return self.sortedUsers.keys.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        self.vkUser[section].count
+        let keySorted = sortedUsers.keys.sorted()
+        let countUsers = sortedUsers[keySorted[section]]?.count ?? 0
+        
+        return countUsers
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "friendsCell", for: indexPath) as! FriendsTableViewCell
-        cell.alias?.text = self.vkUser[indexPath.section][indexPath.row].id
-        cell.fullName?.text = self.vkUser[indexPath.section][indexPath.row].fullName
-        cell.avatar.image = self.vkUser[indexPath.section][indexPath.row].image
+        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "friendsCell", for: indexPath) as? FriendsTableViewCell else {
+            preconditionFailure("Error")
+        }
+        let firstChar = self.sortedUsers.keys.sorted()[indexPath.section]
+        let arrayUsers = sortedUsers[firstChar]!
+        let vkUser = arrayUsers[indexPath.row]
+        
+        cell.alias?.text = vkUser.id
+        cell.fullName?.text = vkUser.fullName
+        cell.avatar.image = vkUser.image
         cell.avatar.layer.cornerRadius = cell.avatar.frame.size.width / 2
         cell.avatar.clipsToBounds = true
         return cell
@@ -82,14 +104,18 @@ class FriendsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "profileFriend") as! ProfileCollectionViewController
-        vc.title = vkUser[indexPath.section][indexPath.row].id
-        vc.photo = vkUser[indexPath.section][indexPath.row].photo
         
+        let keySorted = sortedUsers.keys.sorted()
+        guard let vkUsers = sortedUsers[keySorted[indexPath.section]] else { return }
+        
+        vc.title = vkUsers[indexPath.row].id
+        vc.photo = vkUsers[indexPath.row].photo
+
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return self.vkUser[section][0].id
+        return String(sortedUsers.keys.sorted()[section])
     }
     /*
     // Override to support con4ditional editing of the table view.
