@@ -73,6 +73,21 @@ class Photo {
     }
 }
 
+class News {
+    let title: String
+    let text: String
+    var like: UInt8
+    var myLike: UInt8 = 0
+    let photo: [Photo]
+    
+    init (title: String, text: String, like: UInt8, photo: [Photo]) {
+        self.title = title
+        self.text = text
+        self.like = like
+        self.photo = photo
+    }
+}
+
 /// Возвращает индекс найденной строки в массиве
 /// - Parameters:
 ///   - searchValue: искомое значение
