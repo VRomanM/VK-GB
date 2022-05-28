@@ -102,16 +102,28 @@ class FriendsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "profileFriend") as! ProfileCollectionViewController
+        guard let cell = tableView.cellForRow(at: indexPath) as? FriendsTableViewCell else {
+            preconditionFailure("Error")
+        }
         
-        let keySorted = sortedUsers.keys.sorted()
-        guard let vkUsers = sortedUsers[keySorted[indexPath.section]] else { return }
-        
-        vc.title = vkUsers[indexPath.row].id
-        vc.photo = vkUsers[indexPath.row].photo
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.1, initialSpringVelocity: 1, options: .curveEaseInOut) {
+//            cell.containerAvatar.layer.opacity = 0
+            cell.containerAvatar.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+            cell.containerAvatar.transform = .identity
+        } completion: { _ in
+            print("Hello")
+            
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "profileFriend") as! ProfileCollectionViewController
 
-        self.navigationController?.pushViewController(vc, animated: true)
+            let keySorted = self.sortedUsers.keys.sorted()
+            guard let vkUsers = self.sortedUsers[keySorted[indexPath.section]] else { return }
+
+            vc.title = vkUsers[indexPath.row].id
+            vc.photo = vkUsers[indexPath.row].photo
+
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

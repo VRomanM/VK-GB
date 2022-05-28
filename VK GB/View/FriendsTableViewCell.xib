@@ -28,7 +28,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="94" height="94"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="i3k-bc-wOf" firstAttribute="leading" secondItem="y0O-v2-jnl" secondAttribute="leading" id="4qt-VC-MVQ"/>
                             <constraint firstAttribute="trailing" secondItem="781-8D-uPa" secondAttribute="trailing" id="MD2-0a-4YA"/>
@@ -75,6 +74,7 @@
             <connections>
                 <outlet property="alias" destination="o4r-GX-0fT" id="NRg-3l-6hM"/>
                 <outlet property="avatar" destination="781-8D-uPa" id="3Lk-TT-E8j"/>
+                <outlet property="containerAvatar" destination="y0O-v2-jnl" id="bD0-cz-pf1"/>
                 <outlet property="fullName" destination="ziN-Cm-ncN" id="4uj-gw-wAm"/>
             </connections>
             <point key="canvasLocation" x="140.57971014492756" y="122.54464285714285"/>

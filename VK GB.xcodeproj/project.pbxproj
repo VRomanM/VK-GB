@@ -16,6 +16,7 @@
 		FC1C45D12826B4420035B0EE /* ProfileCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C45D02826B4420035B0EE /* ProfileCollectionViewController.swift */; };
 		FC85644B283C2DD60083260D /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85644A283C2DD60083260D /* NewsViewController.swift */; };
 		FC85644D283C309F0083260D /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85644C283C309F0083260D /* NewsTableViewCell.swift */; };
+		FC85644F283EBBC50083260D /* LoaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85644E283EBBC50083260D /* LoaderViewController.swift */; };
 		FC8F1105283585EE009387A3 /* AvatarFriendUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8F1104283585EE009387A3 /* AvatarFriendUIView.swift */; };
 		FC8F110728358C06009387A3 /* LikeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8F110628358C06009387A3 /* LikeControl.swift */; };
 		FCC2488128217BB100769EC3 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC2488028217BB100769EC3 /* FriendsTableViewController.swift */; };
@@ -39,6 +40,7 @@
 		FC1C45D02826B4420035B0EE /* ProfileCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewController.swift; sourceTree = "<group>"; };
 		FC85644A283C2DD60083260D /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		FC85644C283C309F0083260D /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
+		FC85644E283EBBC50083260D /* LoaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderViewController.swift; sourceTree = "<group>"; };
 		FC8F1104283585EE009387A3 /* AvatarFriendUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarFriendUIView.swift; sourceTree = "<group>"; };
 		FC8F110628358C06009387A3 /* LikeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeControl.swift; sourceTree = "<group>"; };
 		FCC2488028217BB100769EC3 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				FCC24887282186CE00769EC3 /* GroupsTableViewController.swift */,
 				FC190305281B060600018187 /* LoginViewController.swift */,
 				FC1C45D02826B4420035B0EE /* ProfileCollectionViewController.swift */,
+				FC85644E283EBBC50083260D /* LoaderViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 				FCC2488428217F6300769EC3 /* FriendsTableViewCell.swift in Sources */,
 				FC8F1105283585EE009387A3 /* AvatarFriendUIView.swift in Sources */,
 				FC8F110728358C06009387A3 /* LikeControl.swift in Sources */,
+				FC85644F283EBBC50083260D /* LoaderViewController.swift in Sources */,
 				FCC24888282186CE00769EC3 /* GroupsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

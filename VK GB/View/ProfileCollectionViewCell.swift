@@ -26,13 +26,19 @@ class ProfileCollectionViewCell: UICollectionViewCell {
     @objc func handlerTap(_ :UITapGestureRecognizer) {
         likeControl.isLiked.toggle()
         if likeControl.isLiked {
-            likeControl.likeImage.image = UIImage(systemName: "suit.heart.fill")
-                        
-            likeCount.text = String(Int(likeCount.text ?? "0")! + 1)
+            UIView.transition(with: likeControl.likeImage, duration: 1, options: .transitionFlipFromRight) {
+                self.likeControl.likeImage.image = UIImage(systemName: "suit.heart.fill")
+            }
+            UIView.transition(with: likeCount, duration: 1, options: .transitionFlipFromBottom) {
+                self.likeCount.text = String(Int(self.likeCount.text ?? "0")! + 1)
+            }
         } else {
-            likeControl.likeImage.image = nil
-            likeCount.text = String(Int(likeCount.text ?? "0")! - 1)
+            UIView.transition(with: likeControl.likeImage, duration: 1, options: .transitionFlipFromRight) {
+                self.likeControl.likeImage.image = UIImage(systemName: "suit.heart")
+            }
+            UIView.transition(with: likeCount, duration: 1, options: .transitionFlipFromBottom) {
+                self.likeCount.text = String(Int(self.likeCount.text ?? "0")! - 1)
+            }
         }
     }
-    
 }
