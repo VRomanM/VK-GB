@@ -17,13 +17,13 @@ class ProfileCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var likeCount: UILabel!
     
     override func awakeFromNib() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handlerTap(_:)))
-        tap.numberOfTapsRequired = 2
-        containerView.addGestureRecognizer(tap)
-        
+        let tap2 = UITapGestureRecognizer(target: self, action: #selector(handlerTap2(_:)))
+        tap2.numberOfTapsRequired = 2
+        containerView.addGestureRecognizer(tap2)
     }
 
-    @objc func handlerTap(_ :UITapGestureRecognizer) {
+    @objc func handlerTap2(_ :UITapGestureRecognizer) {
+        
         likeControl.isLiked.toggle()
         if likeControl.isLiked {
             UIView.transition(with: likeControl.likeImage, duration: 1, options: .transitionFlipFromRight) {

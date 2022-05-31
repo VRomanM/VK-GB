@@ -55,6 +55,17 @@ class ProfileCollectionViewController: UICollectionViewController {
         return cell
     }
 
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        guard let vc = sb.instantiateViewController(withIdentifier: "photoProfile") as? PhotoProfileViewController else {
+            preconditionFailure("Error")
+        }
+        vc.photo = self.photo
+        vc.idxSelectPhoto = indexPath.row
+        
+        self.navigationController?.present(vc, animated: true)
+    }
+    
     // MARK: UICollectionViewDelegate
 
     /*

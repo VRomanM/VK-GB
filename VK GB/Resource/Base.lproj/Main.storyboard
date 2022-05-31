@@ -343,6 +343,53 @@
             </objects>
             <point key="canvasLocation" x="2586.9565217391305" y="-209.59821428571428"/>
         </scene>
+        <!--Photo Profile View Controller-->
+        <scene sceneID="syE-wo-ekB">
+            <objects>
+                <viewController storyboardIdentifier="photoProfile" modalPresentationStyle="fullScreen" id="J7H-4b-1oS" customClass="PhotoProfileViewController" customModule="VK_GB" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="r7Z-rL-MVg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xQX-gd-qRq">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WeH-vO-Phq">
+                                        <rect key="frame" x="0.0" y="202" width="414" height="414"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="WeH-vO-Phq" secondAttribute="height" multiplier="1:1" id="3RG-QR-2CV"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="WeH-vO-Phq" firstAttribute="height" secondItem="xQX-gd-qRq" secondAttribute="height" multiplier="0.506112" id="5hM-6e-hy0"/>
+                                    <constraint firstItem="WeH-vO-Phq" firstAttribute="centerX" secondItem="xQX-gd-qRq" secondAttribute="centerX" id="72i-w3-k58"/>
+                                    <constraint firstItem="WeH-vO-Phq" firstAttribute="centerY" secondItem="xQX-gd-qRq" secondAttribute="centerY" id="Cct-br-DeK"/>
+                                    <constraint firstItem="WeH-vO-Phq" firstAttribute="width" secondItem="xQX-gd-qRq" secondAttribute="width" id="XjW-IV-Km0"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="J4K-Tv-fYy"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="xQX-gd-qRq" firstAttribute="bottom" secondItem="J4K-Tv-fYy" secondAttribute="bottom" id="2Yo-8t-GmR"/>
+                            <constraint firstItem="xQX-gd-qRq" firstAttribute="leading" secondItem="r7Z-rL-MVg" secondAttribute="leading" id="Tle-UD-GyO"/>
+                            <constraint firstAttribute="trailing" secondItem="xQX-gd-qRq" secondAttribute="trailing" id="otc-vG-TTn"/>
+                            <constraint firstItem="xQX-gd-qRq" firstAttribute="top" secondItem="J4K-Tv-fYy" secondAttribute="top" id="snz-dl-4bX"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="BY4-fd-mfJ"/>
+                    <connections>
+                        <outlet property="containerView" destination="xQX-gd-qRq" id="8Km-iO-BMH"/>
+                        <outlet property="imagePhoto" destination="WeH-vO-Phq" id="efA-Cb-aRO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KiI-ZA-4PZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3355" y="-210"/>
+        </scene>
         <!--Новости-->
         <scene sceneID="Pow-gq-mhD">
             <objects>

@@ -111,8 +111,6 @@ class FriendsTableViewController: UITableViewController {
             cell.containerAvatar.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
             cell.containerAvatar.transform = .identity
         } completion: { _ in
-            print("Hello")
-            
             let sb = UIStoryboard(name: "Main", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "profileFriend") as! ProfileCollectionViewController
 
