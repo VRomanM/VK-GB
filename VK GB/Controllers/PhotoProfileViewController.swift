@@ -47,21 +47,19 @@ class PhotoProfileViewController: UIViewController {
             })
 
             propertyAnimate.addCompletion { position in
+                self.containerView.transform = .identity
                 switch position {
                 case .end:
                     self.changeIdxNextPhoto(xSwipe: xSwipe)
-                    self.containerView.transform = .identity
-                    
                     if wasIdxSelectPhoto != self.idxSelectPhoto {
                         self.imagePhoto.image = UIImage(systemName: self.photo[self.idxSelectPhoto].id)
                     }
                 case .start:
-                    self.containerView.transform = .identity
+                    print("Start")
                 case .current:
-                    self.containerView.transform = .identity
+                    print("Current")
                 @unknown default:
                     print("error")
-                    self.containerView.transform = .identity
                     break
                 }
             }

@@ -111,15 +111,15 @@ class FriendsTableViewController: UITableViewController {
             cell.containerAvatar.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
             cell.containerAvatar.transform = .identity
         } completion: { _ in
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "profileFriend") as! ProfileCollectionViewController
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "profileFriend") as! ProfileCollectionViewController
 
             let keySorted = self.sortedUsers.keys.sorted()
             guard let vkUsers = self.sortedUsers[keySorted[indexPath.section]] else { return }
 
             vc.title = vkUsers[indexPath.row].id
             vc.photo = vkUsers[indexPath.row].photo
-
+            vc.transitioningDelegate = vc
+            
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -173,3 +173,4 @@ class FriendsTableViewController: UITableViewController {
     */
 
 }
+

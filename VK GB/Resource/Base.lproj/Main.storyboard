@@ -586,7 +586,7 @@
         <!--Друзья-->
         <scene sceneID="Uxf-N2-Kxe">
             <objects>
-                <navigationController id="AEV-wT-9B0" sceneMemberID="viewController">
+                <navigationController id="AEV-wT-9B0" customClass="CustomNavigation" customModule="VK_GB" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Друзья" image="person.fill" catalog="system" selectedImage="person.fill" id="F9S-Le-kkX"/>
                     <navigationItem key="navigationItem" id="r2N-Rr-9Xr"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WWa-9B-Yeu">
