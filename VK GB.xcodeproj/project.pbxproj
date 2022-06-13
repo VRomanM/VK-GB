@@ -21,6 +21,7 @@
 		FC8C21B1284E7F6600A5687F /* CustomNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8C21B0284E7F6600A5687F /* CustomNavigation.swift */; };
 		FC8C21B3284E7F6900A5687F /* CustomPush+PopAnimators.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8C21B2284E7F6900A5687F /* CustomPush+PopAnimators.swift */; };
 		FC8C21B5284E7F8500A5687F /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8C21B4284E7F8500A5687F /* Animator.swift */; };
+		FC8C21B728576A9B00A5687F /* ConnectionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8C21B628576A9B00A5687F /* ConnectionSettings.swift */; };
 		FC8F1105283585EE009387A3 /* AvatarFriendUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8F1104283585EE009387A3 /* AvatarFriendUIView.swift */; };
 		FC8F110728358C06009387A3 /* LikeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8F110628358C06009387A3 /* LikeControl.swift */; };
 		FCC2488128217BB100769EC3 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC2488028217BB100769EC3 /* FriendsTableViewController.swift */; };
@@ -49,6 +50,7 @@
 		FC8C21B0284E7F6600A5687F /* CustomNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigation.swift; sourceTree = "<group>"; };
 		FC8C21B2284E7F6900A5687F /* CustomPush+PopAnimators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomPush+PopAnimators.swift"; sourceTree = "<group>"; };
 		FC8C21B4284E7F8500A5687F /* Animator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
+		FC8C21B628576A9B00A5687F /* ConnectionSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionSettings.swift; sourceTree = "<group>"; };
 		FC8F1104283585EE009387A3 /* AvatarFriendUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarFriendUIView.swift; sourceTree = "<group>"; };
 		FC8F110628358C06009387A3 /* LikeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeControl.swift; sourceTree = "<group>"; };
 		FCC2488028217BB100769EC3 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				FCD1E736282A5EBF007C837E /* VK.swift */,
+				FC8C21B628576A9B00A5687F /* ConnectionSettings.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 				FC190302281B060600018187 /* AppDelegate.swift in Sources */,
 				FCC2488B2821A5F300769EC3 /* AllGroupsTableViewController.swift in Sources */,
 				FC8C21B5284E7F8500A5687F /* Animator.swift in Sources */,
+				FC8C21B728576A9B00A5687F /* ConnectionSettings.swift in Sources */,
 				FCD1E737282A5EBF007C837E /* VK.swift in Sources */,
 				FCD1E73A282ADFEC007C837E /* ProfileCollectionViewCell.swift in Sources */,
 				FCC2488128217BB100769EC3 /* FriendsTableViewController.swift in Sources */,
