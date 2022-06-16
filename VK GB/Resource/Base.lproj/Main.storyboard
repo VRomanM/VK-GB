@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Yud-Ix-czD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="j7y-Lc-dco">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -63,6 +63,81 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="okk-Cl-nyQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1271.0144927536232" y="95.758928571428569"/>
+        </scene>
+        <!--Web Login View Controller-->
+        <scene sceneID="pU1-s3-LeP">
+            <objects>
+                <viewController id="j7y-Lc-dco" customClass="WebLoginViewController" customModule="VK_GB" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2m7-CF-akD">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d0c-BG-PFZ">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X3m-yK-CzJ">
+                                <rect key="frame" x="40" y="825" width="100" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="ZBt-C2-WZ4"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Друзья"/>
+                                <connections>
+                                    <action selector="pushFriendsButton:" destination="j7y-Lc-dco" eventType="touchUpInside" id="mrK-vH-YWE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ig-9S-QGc">
+                                <rect key="frame" x="150" y="825" width="100" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="Txe-lT-km4"/>
+                                    <constraint firstAttribute="width" constant="100" id="WOS-Ke-bVw"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Фото"/>
+                                <connections>
+                                    <action selector="pushPhotoButton:" destination="j7y-Lc-dco" eventType="touchUpInside" id="f6b-SY-k1h"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ztm-1t-Kwq">
+                                <rect key="frame" x="260" y="825" width="100" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="82z-Jt-SLa"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="iPT-XR-un4"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Группы"/>
+                                <connections>
+                                    <action selector="pushGroupsButton:" destination="j7y-Lc-dco" eventType="touchUpInside" id="dkb-LQ-DHx"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="aqe-yH-jV3"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="d0c-BG-PFZ" firstAttribute="top" secondItem="2m7-CF-akD" secondAttribute="top" id="H6l-t2-rA2"/>
+                            <constraint firstAttribute="bottom" secondItem="d0c-BG-PFZ" secondAttribute="bottom" id="NMr-sb-mPd"/>
+                            <constraint firstItem="d0c-BG-PFZ" firstAttribute="leading" secondItem="2m7-CF-akD" secondAttribute="leading" id="Njr-0T-t5d"/>
+                            <constraint firstItem="X3m-yK-CzJ" firstAttribute="bottom" secondItem="d0c-BG-PFZ" secondAttribute="bottom" constant="-40" id="Ts2-XE-WDw"/>
+                            <constraint firstAttribute="trailing" secondItem="d0c-BG-PFZ" secondAttribute="trailing" id="ZHh-ZP-ceg"/>
+                            <constraint firstItem="aqe-yH-jV3" firstAttribute="bottom" secondItem="Ztm-1t-Kwq" secondAttribute="bottom" constant="6" id="aOB-Yc-pcW"/>
+                            <constraint firstItem="X3m-yK-CzJ" firstAttribute="leading" secondItem="d0c-BG-PFZ" secondAttribute="leading" constant="40" id="aZY-Wi-KaS"/>
+                            <constraint firstItem="Ztm-1t-Kwq" firstAttribute="leading" secondItem="5ig-9S-QGc" secondAttribute="trailing" constant="10" id="fCw-KS-KC7"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="5ig-9S-QGc" secondAttribute="bottom" constant="6" id="sYO-19-6jq"/>
+                            <constraint firstItem="5ig-9S-QGc" firstAttribute="leading" secondItem="X3m-yK-CzJ" secondAttribute="trailing" constant="10" id="zKF-JX-gcm"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webview" destination="d0c-BG-PFZ" id="ITB-p2-tRc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bVH-9h-7RV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1271.0144927536232" y="771.42857142857144"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">

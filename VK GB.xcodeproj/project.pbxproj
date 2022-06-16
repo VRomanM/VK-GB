@@ -15,6 +15,7 @@
 		FC19030B281B060700018187 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC19030A281B060700018187 /* Assets.xcassets */; };
 		FC19030E281B060700018187 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC19030C281B060700018187 /* LaunchScreen.storyboard */; };
 		FC1C45D12826B4420035B0EE /* ProfileCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C45D02826B4420035B0EE /* ProfileCollectionViewController.swift */; };
+		FC565937285A542600EEC8FE /* WebLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC565936285A542600EEC8FE /* WebLoginViewController.swift */; };
 		FC85644B283C2DD60083260D /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85644A283C2DD60083260D /* NewsViewController.swift */; };
 		FC85644D283C309F0083260D /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85644C283C309F0083260D /* NewsTableViewCell.swift */; };
 		FC85644F283EBBC50083260D /* LoaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC85644E283EBBC50083260D /* LoaderViewController.swift */; };
@@ -47,6 +48,7 @@
 		FC19030D281B060700018187 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FC19030F281B060700018187 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC1C45D02826B4420035B0EE /* ProfileCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewController.swift; sourceTree = "<group>"; };
+		FC565936285A542600EEC8FE /* WebLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLoginViewController.swift; sourceTree = "<group>"; };
 		FC85644A283C2DD60083260D /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		FC85644C283C309F0083260D /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
 		FC85644E283EBBC50083260D /* LoaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderViewController.swift; sourceTree = "<group>"; };
@@ -84,7 +86,6 @@
 				EFF1E96646565362CAE180D4 /* Pods-VK GB.debug.xcconfig */,
 				283FCBFC39DEA631E0D86D7B /* Pods-VK GB.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -175,6 +176,7 @@
 			children = (
 				FCC2488A2821A5F300769EC3 /* AllGroupsTableViewController.swift */,
 				FC85644A283C2DD60083260D /* NewsViewController.swift */,
+				FC565936285A542600EEC8FE /* WebLoginViewController.swift */,
 				FC8C21A928425E0800A5687F /* PhotoProfileViewController.swift */,
 				FCC2488028217BB100769EC3 /* FriendsTableViewController.swift */,
 				FCC24887282186CE00769EC3 /* GroupsTableViewController.swift */,
@@ -313,6 +315,7 @@
 				FC190306281B060600018187 /* LoginViewController.swift in Sources */,
 				FC190302281B060600018187 /* AppDelegate.swift in Sources */,
 				FCC2488B2821A5F300769EC3 /* AllGroupsTableViewController.swift in Sources */,
+				FC565937285A542600EEC8FE /* WebLoginViewController.swift in Sources */,
 				FC8C21B5284E7F8500A5687F /* Animator.swift in Sources */,
 				FC8C21B728576A9B00A5687F /* ConnectionSettings.swift in Sources */,
 				FCD1E737282A5EBF007C837E /* VK.swift in Sources */,
