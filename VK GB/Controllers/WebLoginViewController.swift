@@ -18,18 +18,18 @@ class WebLoginViewController: UIViewController {
             webview.navigationDelegate = self
         }
     }
-    @IBAction func pushPhotoButton(_ sender: Any) {
-        getPhotoByUserIDAF()
-    }
-    
-    @IBAction func pushFriendsButton(_ sender: Any) {
-        getFriendList()
-    }
-    
-    @IBAction func pushGroupsButton(_ sender: Any) {
-        getGroupsByUserIDAF()
-        getGroupsByStringAF()
-    }
+//    @IBAction func pushPhotoButton(_ sender: Any) {
+//        getPhotoByUserIDAF()
+//    }
+//    
+//    @IBAction func pushFriendsButton(_ sender: Any) {
+//        getFriendList()
+//    }
+//    
+//    @IBAction func pushGroupsButton(_ sender: Any) {
+//        getGroupsByUserIDAF()
+//        getGroupsByStringAF()
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,105 +50,6 @@ class WebLoginViewController: UIViewController {
             URLQueryItem(name: "v", value: "5.131") ]
         let request = URLRequest(url: urlComponents.url!)
         webview.load(request)
-    }
-    
-    private func getFriendList() {
-        // Конфигурация по умолчанию
-        let configuration = URLSessionConfiguration.default // собственная сессия
-        let sessionURL = URLSession(configuration: configuration)
-        // создаем конструктор для url
-        var urlConstructor = URLComponents()
-        // устанавливаем схему
-        urlConstructor.scheme = "https"
-        // устанавливаем хост
-        urlConstructor.host = "api.vk.com" // путь
-        urlConstructor.path = "/method/friends.get" // параметры для запроса
-        urlConstructor.queryItems = [
-            URLQueryItem(name: "user_id", value: String(session.userId)),//value: Session.instance.userId),
-            URLQueryItem(name: "owner_id", value: String(session.userId)),
-            URLQueryItem(name: "access_token", value: session.token),
-            URLQueryItem(name: "v", value: "5.131")
-        ]
-        let url = urlConstructor.url!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        let task = sessionURL.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print("Error \(error.localizedDescription)")
-                return
-            }
-            let json = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments)
-            print(json)
-        }
-        task.resume()
-    }
-    
-    private func getPhotoByUserIDAF() {
-        let url = "https://api.vk.com/method/photos.getProfile"
-        let parameters: Parameters = [
-            "owner_id": session.userId,
-            "access_token": session.token,
-            "v": "5.131"
-        ]
-        AF.request(url, method: .get, parameters: parameters).responseData { response in
-            switch response.result {
-            case .success(let data):
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data)
-                    print(json)
-                } catch {
-                    print("Error")
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
-    private func getGroupsByUserIDAF() {
-        let url = "https://api.vk.com/method/groups.get"
-        let parameters: Parameters = [
-            "user_id": session.userId,
-            "count": 10,
-            "access_token": session.token,
-            "v": "5.131"
-        ]
-        AF.request(url, method: .get, parameters: parameters).responseData { response in
-            switch response.result {
-            case .success(let data):
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data)
-                    print(json)
-                } catch {
-                    print("Error")
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
-    private func getGroupsByStringAF() {
-        let url = "https://api.vk.com/method/groups.search"
-        let parameters: Parameters = [
-            "q": "Волейбол",
-            "count": 10,
-            "access_token": session.token,
-            "v": "5.131"
-        ]
-        AF.request(url, method: .get, parameters: parameters).responseData { response in
-            switch response.result {
-            case .success(let data):
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data)
-                    print(json)
-                } catch {
-                    print("Error")
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
     }
 }
 
@@ -171,11 +72,15 @@ extension WebLoginViewController: WKNavigationDelegate {
                 dict[key] = value
                 return dict
             }
-        let token = params["access_token"]
-        let session = Session.instance
-        session.token = token ?? ""
+        session.token = params["access_token"] ?? ""
         session.userId = params["user_id"] ?? "0"
         
         decisionHandler(.cancel)
+        guard session.token != "" else { return }
+        
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "vkTabBarController")
+        self.present(vc, animated: true, completion: nil)
+        
     }
 }
