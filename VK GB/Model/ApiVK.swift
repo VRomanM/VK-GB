@@ -9,6 +9,7 @@ import Foundation
 import WebKit
 import Alamofire
 import SwiftyJSON
+import SwiftUI
 
 class ApiVK {
     //init() { }
@@ -30,7 +31,7 @@ class ApiVK {
         urlConstructor.queryItems = [
             URLQueryItem(name: "user_id", value: String(session.userId)),//value: Session.instance.userId),
             //URLQueryItem(name: "count", value: "10"),
-            URLQueryItem(name: "fields", value: "nickname"),
+            URLQueryItem(name: "fields", value: "nickname,photo_50"),
             URLQueryItem(name: "access_token", value: session.token),
             URLQueryItem(name: "v", value: "5.131")
         ]
@@ -73,6 +74,21 @@ class ApiVK {
             "access_token": session.token,
             "v": "5.131"
         ]
+        AF.request(url, method: .get, parameters: parameters).responseDecodable { (response: DataResponse<JSON, AFError>) in
+            switch response.result {
+            case .success(let response):
+                let json = JSON(response)
+                let groups = json["response"]["items"].arrayValue.map {
+                    GroupVK(id: $0["id"].intValue, name: $0["name"].stringValue, imageName: $0["photo50"].stringValue)
+                }
+                completion(groups)
+            case .failure:
+                completion([])
+            }
+        }
+        
+        /*
+        // MARK: Пример кода старый. Выше представлен новый, более правильный код
         AF.request(url, method: .get, parameters: parameters).responseData { response in
             switch response.result {
             case .success(let data):
@@ -97,8 +113,10 @@ class ApiVK {
                 print(error)
             }
         }
+        */
     }
     
+        
     func getGroupsByStringAF(str: String, completion: @escaping ([GroupVK]) -> Void ) {
         let session = Session.instance
         let url = "https://api.vk.com/method/groups.search"
