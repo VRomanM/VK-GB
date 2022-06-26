@@ -68,9 +68,11 @@ class FriendsTableViewController: UITableViewController {
         
         cell.alias?.text = vkUser.firstName
         cell.fullName?.text = vkUser.fullName
-        //cell.avatar.image = vkUser.image
-        cell.avatar.kf.setImage(with: URL(string: vkUser.urlPath))
-        
+        if vkUser.urlPath == "" {
+            cell.avatar.image = vkUser.image
+        } else {
+            cell.avatar.kf.setImage(with: URL(string: vkUser.urlPath))
+        }
         cell.avatar.layer.cornerRadius = cell.avatar.frame.size.width / 2
         cell.avatar.clipsToBounds = true
         return cell
