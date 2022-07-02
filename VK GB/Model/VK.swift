@@ -19,8 +19,8 @@ class GroupVK: Object, Codable {
     @Persisted var name: String
     var check: Bool = false
     
-    func primaryKey() -> Int {
-        return id
+    override class func primaryKey() -> String? {
+        "id"
     }
     
     convenience init (id: Int, name: String, imageName: String) {
@@ -74,8 +74,8 @@ class UserVK: Object { //Equatable
     var photo = [Photo]()
     var urlPath = ""
     
-    func primaryKey() -> Int {
-        return id
+    override class func primaryKey() -> String? {
+        "id"
     }
     
     convenience init (id: Int, image: UIImage){
@@ -137,8 +137,8 @@ class Photo: Object {
     @Persisted var like: Int
     //@Persisted var myLike = 0
     
-    func primaryKey() -> Int {
-        return id
+    override class func primaryKey() -> String? {
+        "id"
     }
     
     convenience init (id: Int, urlPath: String, like: Int) {
@@ -156,8 +156,8 @@ class News: Object {
     @Persisted var myLike = 0
     var photo: [Photo] = []
     
-    func primaryKey() -> String {
-        return title
+    override class func primaryKey() -> String? {
+        "title"
     }
     
     convenience init (title: String, text: String, like: Int, photo: [Photo]) {
