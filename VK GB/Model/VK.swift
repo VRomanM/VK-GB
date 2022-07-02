@@ -72,7 +72,7 @@ class UserVK: Object { //Equatable
     @Persisted var firstName: String = ""
     @Persisted var lastName: String = ""
     var photo = [Photo]()
-    var urlPath = ""
+    @Persisted var urlPath = ""
     
     override class func primaryKey() -> String? {
         "id"

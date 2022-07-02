@@ -6,21 +6,40 @@
 //
 
 import UIKit
+import RealmSwift
 
 class GroupsTableViewController: UITableViewController {
 
     @IBOutlet var groupsTableView: UITableView!
-    var vkGroup: [GroupVK] = [] {
-         didSet {
-             tableView.reloadData()
-         }
-     }
-        
+    var apiVK = ApiVK()
+//    var vkGroup: [GroupVK] = [] {
+//         didSet {
+//             tableView.reloadData()
+//         }
+//     }
+//    var vkGroup: [GroupVK] = []
+    var vkData: Results<GroupVK>?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        ApiVK().getGroupsByUserIDAF { [weak self] groupsArray in
-            self?.vkGroup = groupsArray
+        do {
+            var configuartion = Realm.Configuration.defaultConfiguration
+            configuartion.deleteRealmIfMigrationNeeded = General.instance.needMigration
+            let realm = try Realm(configuration: configuartion)
+            print(realm.configuration.fileURL?.absoluteString ?? "NO REALM URL")
+            let vkResult = realm.objects(GroupVK.self).sorted(by: \.name)
+            vkData = vkResult
+        } catch {
+            print(error.localizedDescription)
         }
+        
+        apiVK.getGroupsByUserIDAF { [weak self] groupsArray in
+            //self?.vkGroup = groupsArray
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -28,26 +47,26 @@ class GroupsTableViewController: UITableViewController {
     }
     
     @IBAction func addGroup(segue: UIStoryboardSegue) {
-        if segue.identifier == "addGroup" {
-            guard let allGroupsController = segue.source as? AllGroupsTableViewController else { return }
-            if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
-                let group = allGroupsController.filteredData[indexPath.row]
-                if !vkGroup.contains(group) {
-                    vkGroup.append(group)
-                    tableView.reloadData()
-                }
-            }
-        }
+//        if segue.identifier == "addGroup" {
+//            guard let allGroupsController = segue.source as? AllGroupsTableViewController else { return }
+//            if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
+//                let group = allGroupsController.filteredData[indexPath.row]
+//                if !vkGroup.contains(group) {
+//                    vkGroup.append(group)
+//                    tableView.reloadData()
+//                }
+//            }
+//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-        guard segue.identifier == "showAllGroup" else {return}
-        guard let dData = (segue.destination as? AllGroupsTableViewController)?.filteredData else {return}
-        for element in vkGroup {
-            guard let idx = find(value: element, in: dData) else { return }
-            dData[idx].check = true
-        }
+//        super.prepare(for: segue, sender: sender)
+//        guard segue.identifier == "showAllGroup" else {return}
+//        guard let dData = (segue.destination as? AllGroupsTableViewController)?.filteredData else {return}
+//        for element in vkGroup {
+//            guard let idx = find(value: element, in: dData) else { return }
+//            dData[idx].check = true
+//        }
     }
     
     // MARK: - Table view data source
@@ -59,7 +78,9 @@ class GroupsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.vkGroup.count
+        
+        //return self.vkGroup.count
+        return vkData?.count ?? 0
 //        switch tableView {
 //        case self.tableView:
 //            if self.data[0].count == 0 {
@@ -75,8 +96,8 @@ class GroupsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier")!
               
-        cell.textLabel?.text = vkGroup[indexPath.row].name
-        cell.imageView?.image = UIImage(systemName: vkGroup[indexPath.row].imageName)
+        cell.textLabel?.text = vkData?[indexPath.row].name
+        cell.imageView?.image = UIImage(systemName: vkData?[indexPath.row].imageName ?? "")
         
         return cell
     }
@@ -93,8 +114,11 @@ class GroupsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            vkGroup.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+//            vkGroup.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            
         //} else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    

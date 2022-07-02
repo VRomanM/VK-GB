@@ -10,12 +10,29 @@ import WebKit
 import Alamofire
 import SwiftyJSON
 import SwiftUI
+import RealmSwift
 
 class ApiVK {
-    //init() { }
+    
+    func saveVKData<T: Object> (_ vk: [T]){
+        //обработка исключений при работе с хранилищем
+        do {
+            //получаем доступ к хранилищу
+            let realm = try Realm()
+            
+            try realm.write{
+                //т.к. мы используем Primary Key, можем не очищать все данные
+//                let oldValues = realm.objects(UserVK.self)
+//                realm.delete(oldValues)
+                realm.add(vk, update: .modified)
+            }
+        } catch {
+            //если произошла ошибка, выводим ее в консоль
+            print(error)
+        }
+    }
     
     // MARK: - Friends
-    
     func getFriendList(completion: @escaping ([UserVK]) -> Void) {
         let session = Session.instance
         // Конфигурация по умолчанию
@@ -57,6 +74,7 @@ class ApiVK {
                 }
             }
             completion(users)
+            self.saveVKData(users)
             //print(users)
             //print(json)
         }
@@ -82,6 +100,7 @@ class ApiVK {
                     GroupVK(id: $0["id"].intValue, name: $0["name"].stringValue, imageName: $0["photo50"].stringValue)
                 }
                 completion(groups)
+                self.saveVKData(groups)
             case .failure:
                 completion([])
             }

@@ -14,3 +14,10 @@ class Session {
     var token: String = ""
     var userId: String = ""
 }
+
+class General {
+    static let instance = General()
+    private init() { }
+    
+    var needMigration = true
+}

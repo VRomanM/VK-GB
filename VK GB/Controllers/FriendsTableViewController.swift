@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import RealmSwift
 
 class FriendsTableViewController: UITableViewController {
     
@@ -14,13 +15,30 @@ class FriendsTableViewController: UITableViewController {
     
     var vkUser = [UserVK]()
     var sortedUsers = [Character: [UserVK]]()
+    private let apiVK = ApiVK()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ApiVK().getFriendList { [weak self] usersArray in
-            self?.vkUser = usersArray
-            self?.sortedUsers = self!.sortUsers(vkUsers: usersArray)
+//        apiVK.getFriendList { [weak self] usersArray in
+//            self?.vkUser = usersArray
+//            self?.sortedUsers = self!.sortUsers(vkUsers: usersArray)
+//            DispatchQueue.main.async {
+//                self?.tableView.reloadData()
+//            }
+//        }
+        do {
+            var configuartion = Realm.Configuration.defaultConfiguration
+            configuartion.deleteRealmIfMigrationNeeded = General.instance.needMigration
+            let realm = try Realm(configuration: configuartion)
+            print(realm.configuration.fileURL?.absoluteString ?? "NO REALM URL")
+            let vkResult = realm.objects(UserVK.self).sorted(by: \.firstName)
+            sortedUsers = self.sortUsers(vkUsers: vkResult)
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        apiVK.getFriendList { [weak self] usersArray in
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
@@ -28,7 +46,7 @@ class FriendsTableViewController: UITableViewController {
         friendsTableView.register(UINib(nibName: "FriendsTableViewCell", bundle: nil), forCellReuseIdentifier: "friendsCell")
     }
     
-    private func sortUsers(vkUsers: [UserVK]) -> [Character: [UserVK]] {
+    private func sortUsers(vkUsers: Results<UserVK>) -> [Character: [UserVK]] {
         var sortedUser = [Character: [UserVK]]()
         
         vkUsers.forEach{vkUser in
