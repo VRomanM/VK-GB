@@ -51,7 +51,7 @@ class ProfileCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ProfileCollectionViewCell
         //cell.contentView = UINib(nibName: <#T##String#>, bundle: <#T##Bundle?#>)
         cell.descriptionPhoto.text = photo[indexPath.row].description
-        cell.image.image = UIImage(systemName: photo[indexPath.row].id)
+        cell.image.image = UIImage(systemName: photo[indexPath.row].urlPath)
         return cell
     }
 

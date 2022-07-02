@@ -15,11 +15,11 @@ class NewsViewController: UIViewController {
                                 С бывшего мэра Иркутска требуют почти 2 млн рублей за выборы
                                 Избирательная комиссия Иркутска подготовила судебный иск к бывшему мэру города единороссу Дмитрию Бердникову с требованием возместить 1,75 млн руб. за проведение повторных выборов в гордуму. В 2019 году господин Бердников баллотировался в депутаты с целью пролонгировать свои полномочия (тогда градоначальник избирался из числа парламентариев), но в итоге от мандата отказался. Сейчас чиновник работает первым заместителем председателя правительства Якутии.
                                 """
-                       , like: 10, photo: [Photo(id: "news1", description: "Депутат", like: 0)]),
+                       , like: 10, photo: [Photo(id: 1, urlPath: "Депутат", like: 0)]),
                   News(title: "ВТБ предложил Минфину новые стимулы для развития в России рынка бриллиантов", text: """
                                               Меры по развитию внутренней альтернативы валютным инвестиционным активам и поддержке алмазной отрасли могли быть гораздо более масштабными, чем обнуление НДС для физлиц при сделках с драгоценными камнями, выяснили «Ведомости».
                                               """
-                                     , like: 0, photo: [Photo(id: "news2", description: "Алмаз в руке", like: 0)])]
+                                     , like: 0, photo: [Photo(id: 2, urlPath: "Алмаз в руке", like: 0)])]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +53,7 @@ extension NewsViewController: UITableViewDataSource {
         
         cell.title.text = vkNews[indexPath.row].title
         cell.textNews.text = vkNews[indexPath.row].text
-        cell.imageNews.image = UIImage(named: vkNews[indexPath.row].photo[0].id)
+        cell.imageNews.image = UIImage(named: vkNews[indexPath.row].photo[0].urlPath)
         cell.title.text = vkNews[indexPath.row].title
         cell.likeCount.text = String(vkNews[indexPath.row].like + vkNews[indexPath.row].myLike)
         if vkNews[indexPath.row].myLike == 1 {

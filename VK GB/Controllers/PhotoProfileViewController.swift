@@ -19,7 +19,7 @@ class PhotoProfileViewController: UIViewController {
         super.viewDidLoad()
         
         if photo.count > 0 {
-            imagePhoto.image = UIImage(systemName: photo[idxSelectPhoto].id)
+            imagePhoto.image = UIImage(systemName: photo[idxSelectPhoto].urlPath)
         }
         
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(viewPaned(_:)))
@@ -52,7 +52,7 @@ class PhotoProfileViewController: UIViewController {
                 case .end:
                     self.changeIdxNextPhoto(xSwipe: xSwipe)
                     if wasIdxSelectPhoto != self.idxSelectPhoto {
-                        self.imagePhoto.image = UIImage(systemName: self.photo[self.idxSelectPhoto].id)
+                        self.imagePhoto.image = UIImage(systemName: self.photo[self.idxSelectPhoto].urlPath)
                     }
                 case .start:
                     print("Start")

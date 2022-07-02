@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class FriendsTableViewCell: UITableViewCell {
 
@@ -18,5 +19,11 @@ class FriendsTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        avatar.kf.cancelDownloadTask()
+        avatar.image = nil
     }
 }
