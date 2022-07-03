@@ -6,14 +6,29 @@
 //
 
 import UIKit
+import KeychainSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    private var onInstallCompleted: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: "on_install_completed")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "on_install_completed")
+        }
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        if !onInstallCompleted {
+            onInstallCompleted = true
+            let keychain = KeychainSwift()
+            keychain.delete("access_token")
+        }
+        
         return true
     }
 

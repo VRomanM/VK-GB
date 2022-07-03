@@ -14,16 +14,19 @@ import RealmSwift
 
 class ApiVK {
     
-    func saveVKData<T: Object> (_ vk: [T]){
+    private func saveVKData<T: Object> (_ vk: [T]){
         //обработка исключений при работе с хранилищем
         do {
             //получаем доступ к хранилищу
-            let realm = try Realm()
+            var configuartion = Realm.Configuration.defaultConfiguration
+            configuartion.deleteRealmIfMigrationNeeded = General.instance.needMigration
+            
+            let realm = try Realm(configuration: configuartion)
             
             try realm.write{
                 //т.к. мы используем Primary Key, можем не очищать все данные
-//                let oldValues = realm.objects(UserVK.self)
-//                realm.delete(oldValues)
+                let oldValues = realm.objects(UserVK.self)
+                realm.delete(oldValues)
                 realm.add(vk, update: .modified)
             }
         } catch {
@@ -33,7 +36,7 @@ class ApiVK {
     }
     
     // MARK: - Friends
-    func getFriendList(completion: @escaping ([UserVK]) -> Void) {
+    func getFriendList() {//completion: @escaping ([UserVK]) -> Void) {
         let session = Session.instance
         // Конфигурация по умолчанию
         let configuration = URLSessionConfiguration.default // собственная сессия
@@ -73,7 +76,7 @@ class ApiVK {
                     users.append(user)
                 }
             }
-            completion(users)
+            //completion(users)
             self.saveVKData(users)
             //print(users)
             //print(json)
