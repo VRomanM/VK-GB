@@ -44,25 +44,28 @@ class FriendsTableViewController: UITableViewController {
             vkUsers = vkResult
             
             notificationToken = vkUsers?.observe{ [weak self] change in
+                guard let self = self, let vkUsers = self.vkUsers else { return }
                 switch change{
                 case .initial:
-                    self?.tableView.reloadData()
+                    (self.sortedUsers, self.indexesSection) = self.sortUsers(vkUsers: self.vkUsers!)
+                    self.tableView.reloadData()
                 case .update(let user, let deletions, let insertions, let modifications):
-                    self?.tableView.performBatchUpdates {
+                    //self?.tableView.performBatchUpdates {
 
-                        self?.tableView.deleteRows(at: deletions.map{ IndexPath(item: $0, section: self!.indexesSection[user[$0].firstName.first!]!) }, with: .automatic)
-                        self?.tableView.insertRows(at: insertions.map{ IndexPath(item: $0, section: self!.indexesSection[user[$0].firstName.first!]!) }, with: .automatic)
-                        self?.tableView.reloadRows(at: modifications.map{ IndexPath(item: $0, section: self!.indexesSection[user[$0].firstName.first!]!) }, with: .automatic)
-//                        self?.tableView.reloadData()
-                    }
-                    //self?.tableView.reloadData()
+                        //self?.tableView.deleteRows(at: deletions.map{ IndexPath(item: $0, section: self!.indexesSection[user[$0].firstName.first!]!) }, with: .automatic)
+                        //self?.tableView.insertRows(at: insertions.map{ IndexPath(item: $0, section: self!.indexesSection[user[$0].firstName.first!]!) }, with: .automatic)
+                        //self?.tableView.reloadRows(at: modifications.map{ IndexPath(item: $0, section: self!.indexesSection[user[$0].firstName.first!]!) }, with: .automatic)
+                        //self?.tableView.reloadData()
+                    //}
+                    (self.sortedUsers, self.indexesSection) = self.sortUsers(vkUsers: vkUsers)
+                    self.tableView.reloadData()
                 case .error:
                     break
                 }
                 print(change)
             }
-            
-            (sortedUsers, indexesSection) = self.sortUsers(vkUsers: vkUsers!)
+                        
+            //(sortedUsers, indexesSection) = self.sortUsers(vkUsers: vkUsers!)
         } catch {
             print(error.localizedDescription)
         }

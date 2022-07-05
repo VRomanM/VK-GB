@@ -25,7 +25,7 @@ class ApiVK {
             
             try realm.write{
                 //т.к. мы используем Primary Key, можем не очищать все данные
-                let oldValues = realm.objects(UserVK.self)
+                let oldValues = realm.objects(T.self)
                 realm.delete(oldValues)
                 realm.add(vk, update: .modified)
             }
