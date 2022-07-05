@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import RealmSwift
 
 class FriendsTableViewController: UITableViewController {
     
@@ -14,22 +15,75 @@ class FriendsTableViewController: UITableViewController {
     
     var vkUser = [UserVK]()
     var sortedUsers = [Character: [UserVK]]()
+    var indexesSection = [Character: Int]()
+    
+    private let apiVK = ApiVK()
+    private var notificationToken: NotificationToken?
+    private var vkUsers: Results<UserVK>?
+    
+    deinit {
+        notificationToken?.invalidate()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ApiVK().getFriendList { [weak self] usersArray in
-            self?.vkUser = usersArray
-            self?.sortedUsers = self!.sortUsers(vkUsers: usersArray)
-            DispatchQueue.main.async {
-                self?.tableView.reloadData()
+//        apiVK.getFriendList { [weak self] usersArray in
+//            self?.vkUser = usersArray
+//            self?.sortedUsers = self!.sortUsers(vkUsers: usersArray)
+//            DispatchQueue.main.async {
+//                self?.tableView.reloadData()
+//            }
+//        }
+        do {
+            var configuartion = Realm.Configuration.defaultConfiguration
+            configuartion.deleteRealmIfMigrationNeeded = General.instance.needMigration
+            let realm = try Realm(configuration: configuartion)
+            print(realm.configuration.fileURL?.absoluteString ?? "NO REALM URL")
+            let vkResult = realm.objects(UserVK.self).sorted(by: \.firstName)
+            vkUsers = vkResult
+            
+            notificationToken = vkUsers?.observe{ [weak self] change in
+                guard let self = self, let vkUsers = self.vkUsers else { return }
+                switch change{
+                case .initial:
+                    (self.sortedUsers, self.indexesSection) = self.sortUsers(vkUsers: self.vkUsers!)
+                    self.tableView.reloadData()
+                case .update(let user, let deletions, let insertions, let modifications):
+                    //self?.tableView.performBatchUpdates {
+
+                        //self?.tableView.deleteRows(at: deletions.map{ IndexPath(item: $0, section: self!.indexesSection[user[$0].firstName.first!]!) }, with: .automatic)
+                        //self?.tableView.insertRows(at: insertions.map{ IndexPath(item: $0, section: self!.indexesSection[user[$0].firstName.first!]!) }, with: .automatic)
+                        //self?.tableView.reloadRows(at: modifications.map{ IndexPath(item: $0, section: self!.indexesSection[user[$0].firstName.first!]!) }, with: .automatic)
+                        //self?.tableView.reloadData()
+                    //}
+                    (self.sortedUsers, self.indexesSection) = self.sortUsers(vkUsers: vkUsers)
+                    self.tableView.reloadData()
+                case .error:
+                    break
+                }
+                print(change)
             }
+                        
+            //(sortedUsers, indexesSection) = self.sortUsers(vkUsers: vkUsers!)
+        } catch {
+            print(error.localizedDescription)
         }
+        
+        
+        apiVK.getFriendList()
+//        apiVK.getFriendList { [weak self] usersArray in
+//            DispatchQueue.main.async {
+//                self?.tableView.reloadData()
+//            }
+//        }
         friendsTableView.register(UINib(nibName: "FriendsTableViewCell", bundle: nil), forCellReuseIdentifier: "friendsCell")
     }
-    
-    private func sortUsers(vkUsers: [UserVK]) -> [Character: [UserVK]] {
+        
+    private func sortUsers(vkUsers: Results<UserVK>) -> ([Character: [UserVK]], [Character: Int]) {
         var sortedUser = [Character: [UserVK]]()
+        var indexesSection = [Character: Int]()
+        var startIndex = 0
         
         vkUsers.forEach{vkUser in
             guard let firstChar = vkUser.firstName.first else {return}
@@ -38,9 +92,11 @@ class FriendsTableViewController: UITableViewController {
                 sortedUser[firstChar] = arrayUsers
             } else {
                 sortedUser[firstChar] = [vkUser]
+                indexesSection[firstChar] = startIndex
+                startIndex += 1
             }
         }
-        return sortedUser
+        return (sortedUser, indexesSection)
     }
         
     // MARK: - Table view data source
@@ -148,6 +204,7 @@ class FriendsTableViewController: UITableViewController {
      // Pass the selected object to the new view controller.
      }
      */
+    
     
 }
 

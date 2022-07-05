@@ -8,6 +8,7 @@
 import UIKit
 import WebKit
 import Alamofire
+import KeychainSwift
 
 class WebLoginViewController: UIViewController {
     
@@ -33,6 +34,10 @@ class WebLoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let keychain = KeychainSwift()
+        print(keychain.get("vk_access_token") ?? "NO ACCESS TOKEN")
+        
         configureWebView()
     }
     
@@ -75,6 +80,9 @@ extension WebLoginViewController: WKNavigationDelegate {
         session.token = params["access_token"] ?? ""
         session.userId = params["user_id"] ?? "0"
         
+        let keychain = KeychainSwift()
+        keychain.set(params["access_token"] ?? "", forKey: "vk_access_token")
+     
         decisionHandler(.cancel)
         guard session.token != "" else { return }
         
