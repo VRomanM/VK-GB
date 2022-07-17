@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import FirebaseDatabase
 
 class GroupsTableViewController: UITableViewController {
 
@@ -19,7 +20,7 @@ class GroupsTableViewController: UITableViewController {
 //     }
 //    var vkGroup: [GroupVK] = []
     var vkData: Results<GroupVK>?
-    
+    let session = Session.instance
     override func viewDidLoad() {
         super.viewDidLoad()
         do {
@@ -47,16 +48,21 @@ class GroupsTableViewController: UITableViewController {
     }
     
     @IBAction func addGroup(segue: UIStoryboardSegue) {
-//        if segue.identifier == "addGroup" {
-//            guard let allGroupsController = segue.source as? AllGroupsTableViewController else { return }
-//            if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
-//                let group = allGroupsController.filteredData[indexPath.row]
+        if segue.identifier == "addGroup" {
+            guard let allGroupsController = segue.source as? AllGroupsTableViewController else { return }
+            if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
+                let group = allGroupsController.filteredData[indexPath.row]
 //                if !vkGroup.contains(group) {
 //                    vkGroup.append(group)
 //                    tableView.reloadData()
 //                }
-//            }
-//        }
+            }
+        }
+        //запись в Firebase
+        //let dbLink = Database.database().reference()
+        let dbLink = Database.database(url: "https://vk-gb-4b969-default-rtdb.europe-west1.firebasedatabase.app").reference()
+        dbLink.child(session.userId).setValue("123")
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
