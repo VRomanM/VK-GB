@@ -22,7 +22,6 @@ class ApiVK {
             configuartion.deleteRealmIfMigrationNeeded = General.instance.needMigration
             
             let realm = try Realm(configuration: configuartion)
-            
             try realm.write{
                 //т.к. мы используем Primary Key, можем не очищать все данные
                 let oldValues = realm.objects(T.self)
