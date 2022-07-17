@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
 
@@ -17,19 +18,38 @@ class LoginViewController: UIViewController {
     }
     
     func loginToApp() {
-        guard checkUserData() else {
-            showLoginError()
-            return
-        }
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "vkTabBarController")
-//        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
+        checkUserData(email: loginInput.text, password: passwordInput.text, completition: { [weak self] isCompleted in
+            guard isCompleted else {
+                self?.showLoginError()
+                return
+            }
+            DispatchQueue.main.async {
+                let sb = UIStoryboard(name: "Main", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "vkTabBarController")
+        //        vc.modalPresentationStyle = .fullScreen
+                self?.present(vc, animated: true, completion: nil)
+            }
+        })
+//        guard checkUserData() else {
+//            showLoginError()
+//            return
+//        }
     }
     
-    func checkUserData() -> Bool {
-        guard loginInput.text! == "admin" && passwordInput.text! == "1" else { return false }
-        return true
+    private func checkUserData(email: String?, password: String?, completition: @escaping (Bool) -> Void) {
+//        guard loginInput.text! == "admin" && passwordInput.text! == "1" else { return false }
+//        return true
+        guard let email = loginInput.text,
+              !email.isEmpty,
+              let password = passwordInput.text,
+              !password.isEmpty
+        else {
+            completition(false)
+            return
+        }
+        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+            completition(authResult != nil)
+        }
     }
     
     func showLoginError() {

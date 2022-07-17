@@ -12,4 +12,8 @@ target 'VK GB' do
   pod 'SwiftKeychainWrapper'
   pod 'Kingfisher'
   pod 'KeychainSwift'
+  pod 'FirebaseCore'
+  pod 'FirebaseAnalytics'
+  pod 'FirebaseDatabase'
+  pod 'FirebaseAuth'
 end

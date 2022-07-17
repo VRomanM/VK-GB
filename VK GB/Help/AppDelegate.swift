@@ -7,6 +7,7 @@
 
 import UIKit
 import KeychainSwift
+import FirebaseCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let keychain = KeychainSwift()
             keychain.delete("access_token")
         }
-        
+        FirebaseApp.configure()
         return true
     }
 
